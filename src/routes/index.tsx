@@ -1,7 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { BentoCard } from "@/components/BentoCard";
 import { CodeBlock } from "@/components/CodeBlock";
+import { PricingSection } from "@/components/PricingSection";
+import { useAuth } from "@/hooks/useAuth";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -14,6 +16,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { user, signOut, isLoading } = useAuth();
+
   return (
     <div className="min-h-screen bg-background">
       {/* Nav */}
@@ -28,9 +32,24 @@ function Index() {
           <div className="hidden items-center gap-8 md:flex">
             <a href="#features" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Features</a>
             <a href="#how" className="text-sm text-muted-foreground transition-colors hover:text-foreground">How It Works</a>
-            <button className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-[0_0_20px_-5px_var(--color-glow)]">
-              Get Started
-            </button>
+            <a href="#pricing" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Pricing</a>
+            {!isLoading && (
+              user ? (
+                <button
+                  onClick={() => signOut()}
+                  className="rounded-lg border border-border bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-colors hover:bg-muted"
+                >
+                  Log Out
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-[0_0_20px_-5px_var(--color-glow)]"
+                >
+                  Log In
+                </Link>
+              )
+            )}
           </div>
         </div>
       </nav>
@@ -165,6 +184,9 @@ function Index() {
           </div>
         </div>
       </section>
+
+      {/* Pricing */}
+      <PricingSection />
 
       {/* CTA */}
       <section className="px-6 py-24">
