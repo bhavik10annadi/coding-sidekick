@@ -157,7 +157,7 @@ function Index() {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <span className="font-heading text-4xl font-bold text-primary/30">{item.step}</span>
+                <span className="font-heading text-4xl font-bold text-primary/30 text-slate-300">{item.step}</span>
                 <h3 className="mt-2 font-heading text-xl font-semibold text-foreground">{item.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{item.desc}</p>
               </motion.div>
