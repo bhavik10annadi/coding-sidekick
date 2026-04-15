@@ -185,6 +185,9 @@ function Index() {
         </div>
       </section>
 
+      {/* Pricing */}
+      <PricingSection />
+
       {/* CTA */}
       <section className="px-6 py-24">
         <motion.div
